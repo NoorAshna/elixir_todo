@@ -3,14 +3,35 @@
     Listing Todos
     <:actions>
       <.button href={~p"/todos/new"}>
-        <.icon name="hero-plus" /> New My  todo
+        <.icon name="hero-plus" /> New My todo
       </.button>
     </:actions>
   </.header>
-
-  <.table  id="todos" rows={@todos} row_click={&JS.navigate(~p"/todos/#{&1}")}>
+  <.table id="todos" rows={Enum.filter(@todos, & &1.completed)} row_click={&JS.navigate(~p"/todos/#{&1}")}>
     <:col :let={my__todo} label="Title">{my__todo.title}</:col>
-    <:col :let={my__todo} label="description">{my__todo.description}</:col> 
+    <:col :let={my__todo} label="description">{my__todo.description}</:col>
+    <:col :let={my__todo} label="Completed">{my__todo.completed}</:col>
+    <:action :let={my__todo}>
+      <div class="sr-only">
+        <.link navigate={~p"/todos/#{my__todo}"}>Show</.link>
+      </div>
+      <.link navigate={~p"/todos/#{my__todo}/edit"}>Edit</.link>
+    </:action>
+    <:action :let={my__todo}>
+      <.link href={~p"/todos/#{my__todo}"} method="delete" data-confirm="Are you sure?">
+        Delete
+      </.link>
+    </:action>
+  </.table>
+  <.table id="todos" rows={Enum.filter(@todos, & (!&1.completed))} row_click={&JS.navigate(~p"/todos/#{&1}")}>
+    <:col :let={my__todo} label="Title">{my__todo.title}
+      <%= if String.length(my__todo.title) > 6 do %>
+        <%= String.slice(my__todo.title, 0, 6) <> "..." %>
+          <% else %>
+            <%= my__todo.title %>
+              <% end %>
+    </:col>
+    <:col :let={my__todo} label="description">{my__todo.description}</:col>
     <:col :let={my__todo} label="Completed">{my__todo.completed}</:col>
     <:action :let={my__todo}>
       <div class="sr-only">

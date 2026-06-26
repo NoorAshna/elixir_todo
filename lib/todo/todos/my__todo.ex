@@ -14,6 +14,6 @@ defmodule Todo.Todos.My_Todo do
   def changeset(my__todo, attrs) do
     my__todo
     |> cast(attrs, [:title, :completed, :description])
-    |> validate_required([:title, :completed, :description])
+    |> validate_required([:title, :completed])
   end
 end
