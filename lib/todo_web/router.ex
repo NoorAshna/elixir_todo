@@ -18,6 +18,7 @@ defmodule TodoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    resources "/todos", My_TodoController
   end
 
   # Other scopes may use custom stacks.
@@ -39,6 +40,7 @@ defmodule TodoWeb.Router do
 
       live_dashboard "/dashboard", metrics: TodoWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
+
     end
   end
 end

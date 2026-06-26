@@ -1,0 +1,22 @@
+<Layouts.app flash={@flash}>
+  <.header>
+    My  todo {@my__todo.id}
+    <:subtitle>This is a my__todo record from your database.</:subtitle>
+    <:actions>
+      <.button navigate={~p"/todos"}>
+        <.icon name="hero-arrow-left" />
+      </.button>
+      <.button variant="primary" navigate={~p"/todos/#{@my__todo}/edit?return_to=show"}>
+        <.icon name="hero-pencil-square" /> Edit my__todo
+      </.button>
+    </:actions>
+  </.header>
+
+  <.list>
+    <:item title="Title">{@my__todo.title}</:item>
+    <:item title="Completed">{@my__todo.completed}</:item>
+    <:item :if={@my__todo.description} title="Description">
+      {@my__todo.description}
+    </:item>
+  </.list>
+</Layouts.app>

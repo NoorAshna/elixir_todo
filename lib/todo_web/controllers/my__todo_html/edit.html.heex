@@ -1,0 +1,8 @@
+<Layouts.app flash={@flash}>
+  <.header>
+    Edit My  todo {@my__todo.id}
+    <:subtitle>Use this form to manage my__todo records in your database.</:subtitle>
+  </.header>
+
+  <.my__todo_form changeset={@changeset} action={~p"/todos/#{@my__todo}"} return_to={~p"/todos"} />
+</Layouts.app>
