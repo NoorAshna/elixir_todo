@@ -7,7 +7,7 @@
       </.button>
     </:actions>
   </.header>
-  <.table id="todos" rows={Enum.filter(@todos, & &1.completed)} row_click={&JS.navigate(~p"/todos/#{&1}")}>
+  <.table id="todos" rows={@todos} row_click={&JS.navigate(~p"/todos/#{&1}")}>
     <:col :let={my__todo} label="Title">{my__todo.title}</:col>
     <:col :let={my__todo} label="description">{my__todo.description}</:col>
     <:col :let={my__todo} label="Completed">{my__todo.completed}</:col>
@@ -23,21 +23,15 @@
       </.link>
     </:action>
   </.table>
-  <.table id="todos" rows={Enum.filter(@todos, & (!&1.completed))} row_click={&JS.navigate(~p"/todos/#{&1}")}>
-    <:col :let={my__todo} label="Title">{my__todo.title}
-      <%= if String.length(my__todo.title) > 6 do %>
-        <%= String.slice(my__todo.title, 0, 6) <> "..." %>
-          <% else %>
-            <%= my__todo.title %>
-              <% end %>
+  <.table id="users" rows={@users} row_click={&JS.navigate(~p"/users/#{&1}")}>
+    <:col :let={users} label="Title">{users.name}
     </:col>
-    <:col :let={my__todo} label="description">{my__todo.description}</:col>
-    <:col :let={my__todo} label="Completed">{my__todo.completed}</:col>
-    <:action :let={my__todo}>
+    <:col :let={users} label="description">{users.email}</:col>
+    <:action :let={users}>
       <div class="sr-only">
-        <.link navigate={~p"/todos/#{my__todo}"}>Show</.link>
+        // <.link navigate={~p"/users/#{users}"}>Show</.link>
       </div>
-      <.link navigate={~p"/todos/#{my__todo}/edit"}>Edit</.link>
+      // <.link navigate={~p"/users/#{users}/edit"}>Edit</.link>
     </:action>
     <:action :let={my__todo}>
       <.link href={~p"/todos/#{my__todo}"} method="delete" data-confirm="Are you sure?">
